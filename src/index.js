@@ -52,6 +52,7 @@ class Game extends React.Component {
       }],
       xIsNext: true,
       stepNumber: 0,
+      board: [[0,1,2],[3,4,5],[6,7,8]]
     }
   }
 
