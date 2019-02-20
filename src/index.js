@@ -94,7 +94,7 @@ class Game extends React.Component {
         'Go to move #' + move + ' (' + step.row + ', ' + step.column + ')' :
         'Go to game start';
       return (
-        <li key={move}>
+        <li key={move} className={isSelected(move, this.state.stepNumber)}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
@@ -200,4 +200,11 @@ function calculateColumn(square) {
     default:
       return null;
   }
+}
+
+// Highligh the current move being displayed on the board from the history.
+function isSelected(move, current) {
+  if (move === current) {
+    return 'selected';
+  };
 }
