@@ -91,7 +91,7 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + ' (' + step.row + ', ' + step.column + ')' :
         'Go to game start';
       return (
         <li key={move}>
