@@ -1,14 +1,16 @@
-import React from 'react';
-import Square from './Square';
+import React from "react";
+import Square from "./Square";
 
 class Board extends React.Component {
   renderSquare(i, className) {
-    return <Square
-      className={className}
-      key={i}
-      value={this.props.squares[i]}
-      onClick={() => this.props.onClick(i)}
-    />;
+    return (
+      <Square
+        className={className}
+        key={i}
+        value={this.props.squares[i]}
+        onClick={() => this.props.onClick(i)}
+      />
+    );
   }
 
   // draw the playing board using the playingBoard array from Game defined properties
@@ -26,15 +28,19 @@ class Board extends React.Component {
         // check each square to see if it is one of the winners
         if (isWinningSquare(playingBoard[i][j], this.props.winningSquares)) {
           // add square to the row with the winner class
-          columns.push(this.renderSquare((playingBoard[i][j]), "square winner"));
-      } else {
+          columns.push(this.renderSquare(playingBoard[i][j], "square winner"));
+        } else {
           // add the square to the row
-          columns.push(this.renderSquare((playingBoard[i][j]), 'square'));
+          columns.push(this.renderSquare(playingBoard[i][j], "square"));
         }
       }
 
       // create each row, inserting the columns
-      grid.push(<div key={i} className="board-row">{columns}</div>);
+      grid.push(
+        <div key={i} className="board-row">
+          {columns}
+        </div>
+      );
     }
 
     // return the full board JSX code
@@ -48,11 +54,7 @@ class Board extends React.Component {
     let board = this.drawBoard(playingBoard);
 
     // render the board
-    return (
-      <div>
-        {board}
-      </div>
-    );
+    return <div>{board}</div>;
   }
 }
 
