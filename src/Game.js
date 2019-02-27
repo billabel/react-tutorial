@@ -24,7 +24,7 @@ class Game extends React.Component {
     const row = calculateRow(i);
     const column = calculateColumn(i);
 
-    // check for winner
+    // check for winner or if the square is filled
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -77,9 +77,12 @@ class Game extends React.Component {
       );
     });
 
+    // display a status message
     let status;
     if (winner) {
       status = 'Winner: ' + winner[0];
+    } else if (this.state.stepNumber > 8) {
+      status = 'Draw';
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
