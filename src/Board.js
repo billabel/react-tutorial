@@ -2,8 +2,9 @@ import React from 'react';
 import Square from './Square';
 
 class Board extends React.Component {
-  renderSquare(i) {
+  renderSquare(i, className) {
     return <Square
+      className={className}
       key={i}
       value={this.props.squares[i]}
       onClick={() => this.props.onClick(i)}
@@ -22,7 +23,11 @@ class Board extends React.Component {
 
       // create the columns for each row
       for (let j = 0; j < playingBoard[i].length; j++) {
-        columns.push(this.renderSquare(playingBoard[i][j]));
+        if (isWinningSquare(playingBoard[i][j], this.props.winningSquares)) {
+          columns.push(this.renderSquare((playingBoard[i][j]), "square winner"));
+      } else {
+          columns.push(this.renderSquare((playingBoard[i][j]), 'square'));
+        }
       }
 
       // create each row, inserting the columns
@@ -46,6 +51,13 @@ class Board extends React.Component {
       </div>
     );
   }
+}
+
+function isWinningSquare(i, squares) {
+  if (i === squares[0] || i === squares[1] || i === squares[2]) {
+    return true;
+  }
+  return false;
 }
 
 export default Board;

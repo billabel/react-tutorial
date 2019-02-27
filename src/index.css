@@ -53,3 +53,7 @@ ul {
 .selected, .selected button {
   color: red;
 }
+
+.winner {
+  background-color: limegreen;
+}
