@@ -23,9 +23,12 @@ class Board extends React.Component {
 
       // create the columns for each row
       for (let j = 0; j < playingBoard[i].length; j++) {
+        // check each square to see if it is one of the winners
         if (isWinningSquare(playingBoard[i][j], this.props.winningSquares)) {
+          // add square to the row with the winner class
           columns.push(this.renderSquare((playingBoard[i][j]), "square winner"));
       } else {
+          // add the square to the row
           columns.push(this.renderSquare((playingBoard[i][j]), 'square'));
         }
       }

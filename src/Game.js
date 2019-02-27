@@ -14,7 +14,6 @@ class Game extends React.Component {
       stepNumber: 0,
       playingBoard: [[0,1,2],[3,4,5],[6,7,8]],
       descendingSortOrder: 0,
-      winningSquares: [],
     }
   }
 
@@ -25,10 +24,15 @@ class Game extends React.Component {
     const row = calculateRow(i);
     const column = calculateColumn(i);
 
+    // check for winner
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+
+    // show the next player
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+    // store the move and toggle xIsNext
     this.setState({
       history: history.concat([{
         squares: squares,
@@ -40,13 +44,15 @@ class Game extends React.Component {
     });
   }
 
+  // update state when a move is selected
   jumpTo(step) {
     this.setState({
-    stepNumber: step,
-    xIsNext: (step % 2) === 0,
+      stepNumber: step,
+      xIsNext: (step % 2) === 0,
     });
   }
 
+  // toggle the sort order
   sortMoves(descendingSortOrder) {
     this.setState({
       descendingSortOrder: (descendingSortOrder) ? false : true,
@@ -58,6 +64,7 @@ class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const descendingSortOrder = this.state.descendingSortOrder;
+    const winningSquares = winner ? winner[1] : [];
 
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -81,7 +88,7 @@ class Game extends React.Component {
       <div className="game">
         <div className="game-board">
           <Board
-            winningSquares={ winner ? winner[1] : [] }
+            winningSquares={winningSquares}
             playingBoard={this.state.playingBoard}
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
