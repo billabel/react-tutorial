@@ -59,6 +59,10 @@ class Game extends React.Component {
     })
   }
 
+  resetGame() {
+    window.location.reload();
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -101,6 +105,7 @@ class Game extends React.Component {
           <div>{status}</div>
           <ul>{descendingSortOrder ? moves.reverse() : moves}</ul>
           <button onClick={() => this.sortMoves(descendingSortOrder)}>Sort Moves</button>
+          <button onClick={() => this.resetGame()}>New Game</button>
         </div>
       </div>
     );
